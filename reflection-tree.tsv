@@ -1,0 +1,54 @@
+id	parentId	type	text	options	target	signal
+START	null	start	Good evening. Let's reflect on your day.			
+
+A1_OPEN	START	question	How was your day overall?	Productive|Mixed|Stressful|Tough		
+
+A1_DECIDE	A1_OPEN	decision		answer=Productive|Mixed:A1_Q1;answer=Stressful|Tough:A1_Q2		
+
+A1_Q1	A1_DECIDE	question	What helped most today?	My effort|Team support|Planning|Luck		axis1:internal
+
+A1_Q2	A1_DECIDE	question	How did you react to problems?	Took control|Waited|Felt stuck|Blamed situation		axis1:external
+
+A1_R1	A1_Q1	reflection	You showed ownership in your results.			axis1:internal
+
+A1_R2	A1_Q2	reflection	Challenges felt external, but choices were still possible.			axis1:external
+
+B1	A1_R1	bridge	Now let's reflect on contribution.		A2_OPEN
+
+B2	A1_R2	bridge	Now let's reflect on contribution.		A2_OPEN
+
+A2_OPEN	null	question	How did you contribute today?	Helped others|Did my work|Expected credit|Felt ignored		
+
+A2_DECIDE	A2_OPEN	decision		answer=Helped others|Did my work:A2_Q1;answer=Expected credit|Felt ignored:A2_Q2		
+
+A2_Q1	A2_DECIDE	question	What was your impact?	Helped team|Shared ideas|Solved issue|Saved time		axis2:contribution
+
+A2_Q2	A2_DECIDE	question	Why were you dissatisfied?	No credit|Unequal work|No support|Delays		axis2:entitlement
+
+A2_R1	A2_Q1	reflection	Contribution builds trust and growth.			axis2:contribution
+
+A2_R2	A2_Q2	reflection	Expectations create frustration; contribution creates influence.			axis2:entitlement
+
+B3	A2_R1	bridge	Now widen your perspective.		A3_OPEN
+
+B4	A2_R2	bridge	Now widen your perspective.		A3_OPEN
+
+A3_OPEN	null	question	Who was on your mind most today?	Myself|Team|Colleague|Customer		
+
+A3_DECIDE	A3_OPEN	decision		answer=Myself:A3_Q1;answer=Team|Colleague|Customer:A3_Q2		
+
+A3_Q1	A3_DECIDE	question	What concerned you most?	Stress|Tasks|Deadlines|Results		axis3:self
+
+A3_Q2	A3_DECIDE	question	How were others affected?	Team pressure|Need help|Customer impact|Shared load		axis3:others
+
+A3_R1	A3_Q1	reflection	Looking outward can reduce pressure.			axis3:self
+
+A3_R2	A3_Q2	reflection	Considering others builds empathy and purpose.			axis3:others
+
+SUMMARY	A3_R1	summary	Today you showed {axis1.dominant} ownership, {axis2.dominant} mindset, and {axis3.dominant} awareness.		
+
+SUMMARY2	A3_R2	summary	Today you showed {axis1.dominant} ownership, {axis2.dominant} mindset, and {axis3.dominant} awareness.		
+
+END1	SUMMARY	end	Reflection complete.			
+
+END2	SUMMARY2	end	Reflection complete.
