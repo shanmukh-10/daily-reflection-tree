@@ -1,0 +1,54 @@
+id	parentId	type	text	options	target	signal
+START	null	start	Good evening. Take a moment to reflect on your day.			
+
+A1_OPEN	START	question	How would you describe your day overall?	Productive|Mixed|Stressful|Challenging		
+
+A1_DECIDE	A1_OPEN	decision		answer=Productive|Mixed:A1_Q1;answer=Stressful|Challenging:A1_Q2		
+
+A1_Q1	A1_DECIDE	question	What helped you most today?	My effort|Support from others|Good planning|Good timing		axis1:internal
+
+A1_Q2	A1_DECIDE	question	When problems came up, how did you respond?	Tried to take control|Waited for support|Felt stuck|Blamed the situation		axis1:external
+
+A1_R1	A1_Q1	reflection	You recognized your role in today's progress. That shows ownership.			axis1:internal
+
+A1_R2	A1_Q2	reflection	Today felt difficult, but there were still moments where your choices mattered.			axis1:external
+
+B1	A1_R1	bridge	Now let's think about how you contributed today.		A2_OPEN
+
+B2	A1_R2	bridge	Now let's think about how you contributed today.		A2_OPEN
+
+A2_OPEN	null	question	How did you contribute today?	Helped others|Completed my work|Expected recognition|Felt overlooked		
+
+A2_DECIDE	A2_OPEN	decision		answer=Helped others|Completed my work:A2_Q1;answer=Expected recognition|Felt overlooked:A2_Q2		
+
+A2_Q1	A2_DECIDE	question	What positive impact did you create?	Supported the team|Shared ideas|Solved a problem|Saved time		axis2:contribution
+
+A2_Q2	A2_DECIDE	question	What caused your frustration today?	Lack of recognition|Unequal workload|Lack of support|Delays		axis2:entitlement
+
+A2_R1	A2_Q1	reflection	Contribution builds trust, growth, and stronger teamwork.			axis2:contribution
+
+A2_R2	A2_Q2	reflection	Expectations can create frustration, while contribution increases influence.			axis2:entitlement
+
+B3	A2_R1	bridge	Now let's widen the view beyond yourself.		A3_OPEN
+
+B4	A2_R2	bridge	Now let's widen the view beyond yourself.		A3_OPEN
+
+A3_OPEN	null	question	Who was on your mind most today?	Myself|My team|A colleague|A customer		
+
+A3_DECIDE	A3_OPEN	decision		answer=Myself:A3_Q1;answer=My team|A colleague|A customer:A3_Q2		
+
+A3_Q1	A3_DECIDE	question	What concerned you most today?	Stress|Tasks|Deadlines|Results		axis3:self
+
+A3_Q2	A3_DECIDE	question	How were others affected today?	Team pressure|Needed help|Customer impact|Shared workload		axis3:others
+
+A3_R1	A3_Q1	reflection	Looking beyond your own pressure can bring clarity and balance.			axis3:self
+
+A3_R2	A3_Q2	reflection	Considering others builds empathy, purpose, and stronger relationships.			axis3:others
+
+SUMMARY	A3_R1	summary	Today you showed {axis1.dominant} ownership, {axis2.dominant} mindset, and {axis3.dominant} awareness.		
+
+SUMMARY2	A3_R2	summary	Today you showed {axis1.dominant} ownership, {axis2.dominant} mindset, and {axis3.dominant} awareness.		
+
+END1	SUMMARY	end	Your reflection is complete. See you tomorrow.			
+
+END2	SUMMARY2	end	Your reflection is complete. See you tomorrow.
